@@ -129,10 +129,36 @@ const getUsersAnimals = async (req, res) => {
   }
 };
 
+const getAllAnimals = async (req, res) => {
+  try {
+    let animals = [];
+    await db
+      .collection("animals")
+      .get()
+      .then((querySnapshot) => {
+        let animal;
+        querySnapshot.forEach((doc) => {
+          animal = doc.data();
+          animal.id = doc.id;
+          animals.push(animal);
+        });
+      });
+
+    res.status(200).json({
+      message: "Success!",
+      animals: animals,
+    });
+  } catch (e) {
+    res.status(500).json({
+      message: e.message,
+    });
+  }
+};
 module.exports = {
   generateFakeAnimals,
   addAnimal,
   updateAnimal,
   deleteAnimal,
   getUsersAnimals,
+  getAllAnimals,
 };
