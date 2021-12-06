@@ -15,18 +15,18 @@ router.use(
 );
 router.use(
   "/animals/create/:userId",
-  // middlewares.verifyToken,
+  middlewares.verifyToken,
   animalsController.addAnimal
 );
 router.use("/animals/getAllAnimals", animalsController.getAllAnimals);
 router.use(
   "/animals/update/:animalId",
-  // middlewares.verifyToken,
+  middlewares.verifyToken,
   animalsController.updateAnimal
 );
 router.use(
   "/animals/delete/:animalId",
-  // middlewares.verifyToken,
+  middlewares.verifyToken,
   animalsController.deleteAnimal
 );
 router.use("/animals/:userId", animalsController.getUsersAnimals);
