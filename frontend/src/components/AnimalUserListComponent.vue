@@ -22,15 +22,7 @@ const columns = [
     label: "#",
     field: "index",
   },
-  {
-    name: "Type",
-    required: true,
-    label: "Type",
-    align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
-    sortable: true,
-  },
+
   {
     name: "Breed",
     required: true,
@@ -40,11 +32,10 @@ const columns = [
     format: (val) => `${val}`,
     sortable: true,
   },
-
   {
-    name: "Name",
+    name: "Description",
     required: true,
-    label: "Name",
+    label: "Description",
     align: "left",
     field: (row) => row.name,
     format: (val) => `${val}`,
@@ -60,9 +51,18 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Description",
+    name: "Name",
     required: true,
-    label: "Description",
+    label: "Name",
+    align: "left",
+    field: (row) => row.name,
+    format: (val) => `${val}`,
+    sortable: true,
+  },
+  {
+    name: "Type",
+    required: true,
+    label: "Type",
     align: "left",
     field: (row) => row.name,
     format: (val) => `${val}`,
@@ -106,7 +106,6 @@ export default {
         this.animals = res.data.animals;
         console.log(JSON.stringify(res.data));
         console.log("animale sunt " + JSON.stringify(this.animals));
-
         for (let i = 0; i < this.animals.length; i++) {
           this.rows = this.rows.concat(
             this.animals.map((r, j) => ({
@@ -114,6 +113,7 @@ export default {
               index: i * this.animals.length + j + 1,
             }))
           );
+          console.log(this.rows);
         }
       });
     } catch (err) {
@@ -126,10 +126,10 @@ export default {
     return {
       columns,
 
-      // this.rows,
+      //rows,
 
       pagination: ref({
-        rowsPerPage: 0,
+        rowsPerPage: 5,
       }),
     };
   },
